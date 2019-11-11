@@ -34,6 +34,7 @@ namespace UsefulExplorer
 				if (this.arg.ContainsKey("-l"))
 				{
 					Directories.listFiles(this.arg["-l"]);
+					Console.WriteLine(Directories.getOutput());
 				}
 			}
 			else
@@ -44,10 +45,6 @@ namespace UsefulExplorer
 
 		static void Main(string[] args)
 		{
-			args = new string[2];
-			args[0] = "-l";
-			args[1] = "D:\\Handy\\Handy.tar.gz";
-			
 			new Program(args);
 		}
 	}

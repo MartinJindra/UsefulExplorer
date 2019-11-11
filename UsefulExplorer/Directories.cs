@@ -1,30 +1,21 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace UsefulExplorer
 {
 	class Directories
 	{
-		private string path;
+		private static StringBuilder output;
 
-		public Directories() {}
-
-		public Directories(string path)
+		public Directories()
 		{
-			if (path != null)
-			{
-				this.setPath(path);
-			}
+			Directories.output = new StringBuilder();
 		}
 
-		public void setPath(string path)
+		public static string getOutput()
 		{
-			this.path = path;
-		}
-
-		public string getPath()
-		{
-			return this.path;
+			return Directories.output.ToString();
 		}
 
 		public static void listFiles(string path)
@@ -35,20 +26,30 @@ namespace UsefulExplorer
 				DateTime d = File.GetLastAccessTime(path);
 				for (int i = 0; i < num; i++)
 				{
-					Console.Write("\t");
+					Directories.output.Append("\t");
 				}
-				Console.WriteLine(Path.GetFileName(path) + " - " + d.Date +  " - " + new FileInfo(path).Length + " Bytes");
+				Directories.output.Append(Path.GetFileName(path));
+				Directories.output.Append(" - ");
+				Directories.output.Append(d.Date);
+				Directories.output.Append(" - ");
+				Directories.output.Append(new FileInfo(path).Length);
+				Directories.output.Append(" Bytes\n");
 			}
 			else if (Directory.Exists(path))
 			{
-				for (int i = 0; i < num; i++)
+				for (int i = 0; i < num - 1; i++)
 				{
-					Console.Write("\t");
+					Directories.output.Append("\t");
 				}
-				Console.WriteLine("+" + Path.GetFullPath(path));
-				foreach (string s in Directory.GetFiles(path))
+				Directories.output.Append("+");
+				Directories.output.Append(Path.GetFullPath(path));
+				Directories.output.Append("\n");
+
+
+				foreach (string s in Directory.GetFileSystemEntries(path, "*.*", SearchOption.AllDirectories))
 				{
-					Console.WriteLine(s);
+					Directories.output.Append("\n");
+					Directories.listFiles(s);
 				}
 			}
 		}
