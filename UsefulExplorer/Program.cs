@@ -34,7 +34,8 @@ namespace UsefulExplorer
 				if (this.arg.ContainsKey("-l"))
 				{
 					Directories.listFiles(this.arg["-l"]);
-					Console.WriteLine(Directories.getOutput());
+					string s = Directories.getOutputAtOnce();
+					Console.WriteLine(s.Substring(1, s.Length - 1));
 				}
 			}
 			else

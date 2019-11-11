@@ -7,20 +7,30 @@ namespace UsefulExplorer
 	class Directories
 	{
 		private static StringBuilder output;
+		private static bool first;
 
 		public Directories()
 		{
 			Directories.output = new StringBuilder();
+			Directories.first = true;
 		}
 
-		public static string getOutput()
+		public static string getOutputAtOnce()
 		{
 			return Directories.output.ToString();
 		}
 
 		public static void listFiles(string path)
 		{
-			short num = Directories.getHowManyPaths(path);
+			short num;
+			if (!Directories.first)
+			{
+				num = Directories.getHowManyPaths(path);
+			}
+			else
+			{
+				num = 1;
+			}
 			if (File.Exists(path))
 			{
 				DateTime d = File.GetLastAccessTime(path);
@@ -37,26 +47,33 @@ namespace UsefulExplorer
 			}
 			else if (Directory.Exists(path))
 			{
-				for (int i = 0; i < num - 1; i++)
+				for (int i = 0; i < num; i++)
 				{
 					Directories.output.Append("\t");
 				}
 				Directories.output.Append("+");
-				Directories.output.Append(Path.GetFullPath(path));
+				// for the first folder full name
+				if (Directories.first)
+				{
+					Directories.output.Append(Path.GetFullPath(path));
+				}
+				else
+				{
+					Directories.output.Append(Path.GetFileName(path));
+				}
 				Directories.output.Append("\n");
-
 
 				foreach (string s in Directory.GetFileSystemEntries(path, "*.*", SearchOption.AllDirectories))
 				{
-					Directories.output.Append("\n");
 					Directories.listFiles(s);
 				}
 			}
+			Directories.first = false;
 		}
 
 		private static short getHowManyPaths(string path)
 		{
-			short num = 0;
+			short num = -3;
 			string s = Path.GetFullPath(path);
 			for (int i = 0; i < s.Length; i++)
 			{
