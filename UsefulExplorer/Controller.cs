@@ -8,14 +8,12 @@ using System.Collections.Generic;
  */
 namespace UsefulExplorer
 {
-	class Program
+	class Controller
 	{
 		private Dictionary<string, string> arg;
-		private Directories dir;
 
-		public Program(string[] args)
+		public Controller(string[] args)
 		{
-			this.dir = new Directories();
 			this.init(args);
 		}
 
@@ -30,12 +28,22 @@ namespace UsefulExplorer
 					{
 						this.arg.Add("-l", args[i + 1]);
 					}
+					else if (args[i] == "-b")
+					{
+						this.arg.Add("-b", args[i + 1]);
+					}
 				}
 				if (this.arg.ContainsKey("-l"))
 				{
-					Directories.listFiles(this.arg["-l"]);
-					string s = Directories.getOutputAtOnce();
+					ShowContent.listFiles(this.arg["-l"]);
+					string s = ShowContent.getOutputAtOnce();
 					Console.WriteLine(s.Substring(1, s.Length - 1));
+				}
+				else if (this.arg.ContainsKey("-b"))
+				{
+					ShowBiggest.listFiles(this.arg["-b"]);
+					string s = ShowBiggest.getBiggest();
+					Console.WriteLine(s);
 				}
 			}
 			else
@@ -46,7 +54,7 @@ namespace UsefulExplorer
 
 		static void Main(string[] args)
 		{
-			new Program(args);
+			new Controller(args);
 		}
 	}
 }

@@ -4,28 +4,28 @@ using System.Text;
 
 namespace UsefulExplorer
 {
-	class Directories
+	class ShowContent
 	{
 		private static StringBuilder output;
 		private static bool first;
 
-		public Directories()
+		public ShowContent()
 		{
-			Directories.output = new StringBuilder();
-			Directories.first = true;
+			ShowContent.output = new StringBuilder();
+			ShowContent.first = true;
 		}
 
 		public static string getOutputAtOnce()
 		{
-			return Directories.output.ToString();
+			return ShowContent.output.ToString();
 		}
 
 		public static void listFiles(string path)
 		{
 			short num;
-			if (!Directories.first)
+			if (!ShowContent.first)
 			{
-				num = Directories.getHowManyPaths(path);
+				num = ShowContent.getHowManyPaths(path);
 			}
 			else
 			{
@@ -36,39 +36,39 @@ namespace UsefulExplorer
 				DateTime d = File.GetLastAccessTime(path);
 				for (int i = 0; i < num; i++)
 				{
-					Directories.output.Append("\t");
+					ShowContent.output.Append("\t");
 				}
-				Directories.output.Append(Path.GetFileName(path));
-				Directories.output.Append(" - ");
-				Directories.output.Append(d.Date);
-				Directories.output.Append(" - ");
-				Directories.output.Append(new FileInfo(path).Length);
-				Directories.output.Append(" Bytes\n");
+				ShowContent.output.Append(Path.GetFileName(path));
+				ShowContent.output.Append(" - ");
+				ShowContent.output.Append(d.Date);
+				ShowContent.output.Append(" - ");
+				ShowContent.output.Append(new FileInfo(path).Length);
+				ShowContent.output.Append(" Bytes\n");
 			}
 			else if (Directory.Exists(path))
 			{
 				for (int i = 0; i < num; i++)
 				{
-					Directories.output.Append("\t");
+					ShowContent.output.Append("\t");
 				}
-				Directories.output.Append("+");
+				ShowContent.output.Append("+");
 				// for the first folder full name
-				if (Directories.first)
+				if (ShowContent.first)
 				{
-					Directories.output.Append(Path.GetFullPath(path));
+					ShowContent.output.Append(Path.GetFullPath(path));
 				}
 				else
 				{
-					Directories.output.Append(Path.GetFileName(path));
+					ShowContent.output.Append(Path.GetFileName(path));
 				}
-				Directories.output.Append("\n");
+				ShowContent.output.Append("\n");
 
 				foreach (string s in Directory.GetFileSystemEntries(path, "*.*", SearchOption.AllDirectories))
 				{
-					Directories.listFiles(s);
+					ShowContent.listFiles(s);
 				}
 			}
-			Directories.first = false;
+			ShowContent.first = false;
 		}
 
 		private static short getHowManyPaths(string path)
