@@ -11,9 +11,13 @@ namespace UsefulExplorer
 	class Controller
 	{
 		private Dictionary<string, string> arg;
+		private ShowContent showContent;
+		private ShowBiggest showBiggest;
 
 		public Controller(string[] args)
 		{
+			this.showContent = new ShowContent();
+			this.showBiggest = new ShowBiggest();
 			this.init(args);
 		}
 
@@ -26,24 +30,38 @@ namespace UsefulExplorer
 				{
 					if (args[i] == "-l")
 					{
-						this.arg.Add("-l", args[i + 1]);
+						if (args.Length > 1)
+						{
+							this.arg.Add("-l", args[i + 1]);
+							if (this.arg.ContainsKey("-l"))
+							{
+								ShowContent.listFiles(this.arg["-l"]);
+								string s = ShowContent.getOutputAtOnce();
+								Console.WriteLine(s.Substring(1, s.Length - 1));
+							}
+						}
+						else
+						{
+							Console.WriteLine("second argument is missing");
+						}
 					}
 					else if (args[i] == "-b")
 					{
-						this.arg.Add("-b", args[i + 1]);
+						if (args.Length > 1)
+						{
+							this.arg.Add("-l", args[i + 1]);
+							if (this.arg.ContainsKey("-b"))
+							{
+								ShowBiggest.listFiles(this.arg["-b"]);
+								string s = ShowBiggest.getBiggest();
+								Console.WriteLine(s);
+							}
+						}
+						else
+						{
+							Console.WriteLine("second argument is missing");
+						}
 					}
-				}
-				if (this.arg.ContainsKey("-l"))
-				{
-					ShowContent.listFiles(this.arg["-l"]);
-					string s = ShowContent.getOutputAtOnce();
-					Console.WriteLine(s.Substring(1, s.Length - 1));
-				}
-				else if (this.arg.ContainsKey("-b"))
-				{
-					ShowBiggest.listFiles(this.arg["-b"]);
-					string s = ShowBiggest.getBiggest();
-					Console.WriteLine(s);
 				}
 			}
 			else
