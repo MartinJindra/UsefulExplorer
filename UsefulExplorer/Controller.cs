@@ -11,13 +11,9 @@ namespace UsefulExplorer
 	class Controller
 	{
 		private Dictionary<string, string> arg;
-		private ShowContent showContent;
-		private ShowBiggest showBiggest;
 
 		public Controller(string[] args)
 		{
-			this.showContent = new ShowContent();
-			this.showBiggest = new ShowBiggest();
 			this.init(args);
 		}
 
@@ -83,6 +79,9 @@ namespace UsefulExplorer
 
 		static void Main(string[] args)
 		{
+			args = new string[2];
+			args[0] = "-l";
+			args[1] = "E:\\TGM\\4.Klasse\\INSY\\Uebung";
 			new Controller(args);
 		}
 	}

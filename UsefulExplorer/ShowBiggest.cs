@@ -5,12 +5,7 @@ namespace UsefulExplorer
 {
 	class ShowBiggest
 	{
-		private static Dictionary<string, long> output;
-
-		public ShowBiggest()
-		{
-			ShowBiggest.output = new Dictionary<string, long>();
-		}
+		private static Dictionary<string, long> output = new Dictionary<string, long>();
 
 		public static string getBiggest()
 		{

@@ -6,14 +6,10 @@ namespace UsefulExplorer
 	class ShowContent
 	{
 		private static long totalsize;
-		private static bool first;
-		private static int mainpathcount;
-
-		public ShowContent()
-		{
-			ShowContent.first = true;
-			ShowContent.totalsize = 0;
-		}
+		private static bool first = true;
+		private static int mainpathcount = 0;
+		private static FileInfo fileinfo;
+		private static DateTime d;
 
 		public static void setMainPath(string mainpath)
 		{
@@ -28,47 +24,19 @@ namespace UsefulExplorer
 
 		public static void listFiles(string path)
 		{
-			int num;
-			if (!ShowContent.first)
+			if (Directory.Exists(path))
 			{
-				num = ShowContent.getHowManyPaths(path) - ShowContent.mainpathcount;
+				Console.WriteLine(path);
+				foreach (string item in Directory.GetFileSystemEntries(path))
+				{
+					
+					ShowContent.listFiles(item);
+				}
 			}
-			else
+			else if (File.Exists(path))
 			{
-				num = 0;
-				ShowContent.first = false;
-			}
-			if (File.Exists(path))
-			{
-				DateTime d = File.GetLastAccessTime(path);
-				for (int i = 0; i < num; i++)
-				{
-					Console.Write("\t");
-				}
-				Console.WriteLine(Path.GetFileName(path) + " - " + d.Date + " - " + new FileInfo(path).Length + " Bytes");
-				ShowContent.totalsize += new FileInfo(path).Length;
-			}
-			else if (Directory.Exists(path))
-			{
-				for (int i = 0; i < num; i++)
-				{
-					Console.Write("\t");
-				}
-				Console.Write("+");
-				// for the first folder full name
-				if (ShowContent.first)
-				{
-					Console.WriteLine(Path.GetFullPath(path));
-				}
-				else
-				{
-					Console.WriteLine(Path.GetFileName(path));
-				}
-
-				foreach (string s in Directory.GetFileSystemEntries(path, "*.*", SearchOption.AllDirectories))
-				{
-					ShowContent.listFiles(s);
-				}
+				ShowContent.fileinfo = new FileInfo(path);
+				Console.WriteLine(path + " - " + ShowContent.fileinfo.LastAccessTimeUtc.ToString() + " - " + ShowContent.fileinfo.Length + " Bytes");
 			}
 		}
 
