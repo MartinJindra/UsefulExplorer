@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-/**
- * 
- * @author Martin Jindra
- * @version 11.11.2019
- */
 namespace UsefulExplorer
 {
+	/**
+	* The controller of the programm that manages the input from the cli.
+	* @author Martin Jindra
+	* @version 11.11.2019
+	*/
 	class Controller
 	{
 		private Dictionary<string, string> arg;
@@ -42,9 +42,8 @@ namespace UsefulExplorer
 							this.arg.Add("-l", args[i + 1]);
 							if (this.arg.ContainsKey("-l"))
 							{
+								ShowContent.setMainPath(this.arg["-l"]);
 								ShowContent.listFiles(this.arg["-l"]);
-								string s = ShowContent.getOutputAtOnce();
-								Console.WriteLine(s.Substring(1, s.Length - 1));
 							}
 						}
 						// writes error message if second argument is missing. In this case the path

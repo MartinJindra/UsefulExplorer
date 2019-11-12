@@ -8,72 +8,67 @@ namespace UsefulExplorer
 	{
 		private static StringBuilder output;
 		private static bool first;
+		private static int mainpathcount;
 
 		public ShowContent()
 		{
-			ShowContent.output = new StringBuilder();
 			ShowContent.first = true;
 		}
 
-		public static string getOutputAtOnce()
+		public static void setMainPath(string mainpath)
 		{
-			return ShowContent.output.ToString();
+			ShowContent.mainpathcount = ShowContent.getHowManyPaths(mainpath);
+
 		}
 
 		public static void listFiles(string path)
 		{
-			short num;
+			int num;
 			if (!ShowContent.first)
 			{
-				num = ShowContent.getHowManyPaths(path);
+				num = ShowContent.getHowManyPaths(path) - ShowContent.mainpathcount;
 			}
 			else
 			{
-				num = 1;
+				num = 0;
+				ShowContent.first = false;
 			}
 			if (File.Exists(path))
 			{
 				DateTime d = File.GetLastAccessTime(path);
 				for (int i = 0; i < num; i++)
 				{
-					ShowContent.output.Append("\t");
+					Console.Write("\t");
 				}
-				ShowContent.output.Append(Path.GetFileName(path));
-				ShowContent.output.Append(" - ");
-				ShowContent.output.Append(d.Date);
-				ShowContent.output.Append(" - ");
-				ShowContent.output.Append(new FileInfo(path).Length);
-				ShowContent.output.Append(" Bytes\n");
+				Console.WriteLine(Path.GetFileName(path) + " - " + d.Date + " - " + new FileInfo(path).Length + " Bytes");
 			}
 			else if (Directory.Exists(path))
 			{
 				for (int i = 0; i < num; i++)
 				{
-					ShowContent.output.Append("\t");
+					Console.Write("\t");
 				}
-				ShowContent.output.Append("+");
+				Console.Write("+");
 				// for the first folder full name
 				if (ShowContent.first)
 				{
-					ShowContent.output.Append(Path.GetFullPath(path));
+					Console.WriteLine(Path.GetFullPath(path));
 				}
 				else
 				{
-					ShowContent.output.Append(Path.GetFileName(path));
+					Console.WriteLine(Path.GetFileName(path));
 				}
-				ShowContent.output.Append("\n");
 
 				foreach (string s in Directory.GetFileSystemEntries(path, "*.*", SearchOption.AllDirectories))
 				{
 					ShowContent.listFiles(s);
 				}
 			}
-			ShowContent.first = false;
 		}
 
 		private static short getHowManyPaths(string path)
 		{
-			short num = -3;
+			short num = -1;
 			string s = Path.GetFullPath(path);
 			for (int i = 0; i < s.Length; i++)
 			{
