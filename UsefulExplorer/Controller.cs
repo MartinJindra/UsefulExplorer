@@ -40,7 +40,7 @@ namespace UsefulExplorer
 							{
 								ShowContent.setMainPath(this.arg["-l"]);
 								ShowContent.listFiles(this.arg["-l"]);
-								Console.WriteLine("Total size of folder \'" + this.arg["-l"] + "\':\t" + ByteConverter.convert(ShowContent.getTotalSize()));
+								Console.WriteLine("Total size of folder \'" + this.arg["-l"] + "\': " + ByteConverter.convert(ShowContent.getTotalSize()));
 							}
 						}
 						// writes error message if second argument is missing. In this case the path

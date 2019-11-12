@@ -18,7 +18,6 @@ namespace UsefulExplorer
 		 */
 		public static string convert(double size)
 		{
-			Console.WriteLine(size);
 			string s;
 			int j = 0;
 			int tmp = ("" + size).Length;
