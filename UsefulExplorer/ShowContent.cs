@@ -7,7 +7,8 @@ namespace UsefulExplorer
 	{
 		private static long totalsize;
 		private static bool first = true;
-		private static int mainpathcount = 0;
+		private static int mainpathcount;
+		private static DirectoryInfo directoryInfo;
 		private static FileInfo fileinfo;
 		private static DateTime d;
 
@@ -26,23 +27,32 @@ namespace UsefulExplorer
 		{
 			if (Directory.Exists(path))
 			{
-				Console.WriteLine(path);
+				for (int i = 0; i < ShowContent.getHowManyPaths(path) - ShowContent.mainpathcount; i++)
+				{
+					Console.Write("----");
+				}
+				ShowContent.directoryInfo = new DirectoryInfo(path);
+				Console.WriteLine("+" + ShowContent.directoryInfo.Name);
 				foreach (string item in Directory.GetFileSystemEntries(path))
 				{
-					
 					ShowContent.listFiles(item);
 				}
 			}
 			else if (File.Exists(path))
 			{
+				for (int i = 0; i < ShowContent.getHowManyPaths(path) - ShowContent.mainpathcount; i++)
+				{
+					Console.Write("----");
+				}
 				ShowContent.fileinfo = new FileInfo(path);
-				Console.WriteLine(path + " - " + ShowContent.fileinfo.LastAccessTimeUtc.ToString() + " - " + ShowContent.fileinfo.Length + " Bytes");
+				Console.WriteLine(ShowContent.fileinfo.Name + " - " + ShowContent.fileinfo.LastAccessTimeUtc.ToString() + " - " + ShowContent.fileinfo.Length + " Bytes");
+				ShowContent.totalsize += ShowContent.fileinfo.Length;
 			}
 		}
 
-		private static short getHowManyPaths(string path)
+		private static int getHowManyPaths(string path)
 		{
-			short num = -1;
+			int num = -1;
 			string s = Path.GetFullPath(path);
 			for (int i = 0; i < s.Length; i++)
 			{
