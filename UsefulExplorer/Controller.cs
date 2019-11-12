@@ -44,6 +44,7 @@ namespace UsefulExplorer
 							{
 								ShowContent.setMainPath(this.arg["-l"]);
 								ShowContent.listFiles(this.arg["-l"]);
+								Console.WriteLine("Total size of folder \'" + this.arg["-l"] + "\':\t" + ShowContent.getTotalSize() + " Bytes");
 							}
 						}
 						// writes error message if second argument is missing. In this case the path

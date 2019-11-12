@@ -1,24 +1,29 @@
 ﻿using System;
 using System.IO;
-using System.Text;
 
 namespace UsefulExplorer
 {
 	class ShowContent
 	{
-		private static StringBuilder output;
+		private static long totalsize;
 		private static bool first;
 		private static int mainpathcount;
 
 		public ShowContent()
 		{
 			ShowContent.first = true;
+			ShowContent.totalsize = 0;
 		}
 
 		public static void setMainPath(string mainpath)
 		{
 			ShowContent.mainpathcount = ShowContent.getHowManyPaths(mainpath);
 
+		}
+
+		public static long getTotalSize()
+		{
+			return ShowContent.totalsize;
 		}
 
 		public static void listFiles(string path)
@@ -41,6 +46,7 @@ namespace UsefulExplorer
 					Console.Write("\t");
 				}
 				Console.WriteLine(Path.GetFileName(path) + " - " + d.Date + " - " + new FileInfo(path).Length + " Bytes");
+				ShowContent.totalsize += new FileInfo(path).Length;
 			}
 			else if (Directory.Exists(path))
 			{
