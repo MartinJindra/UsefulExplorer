@@ -6,11 +6,9 @@ namespace UsefulExplorer
 	class ShowContent
 	{
 		private static long totalsize;
-		private static bool first = true;
 		private static int mainpathcount;
 		private static DirectoryInfo directoryInfo;
 		private static FileInfo fileinfo;
-		private static DateTime d;
 
 		public static void setMainPath(string mainpath)
 		{

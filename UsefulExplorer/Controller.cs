@@ -79,9 +79,6 @@ namespace UsefulExplorer
 
 		static void Main(string[] args)
 		{
-			args = new string[2];
-			args[0] = "-l";
-			args[1] = "E:\\TGM";
 			new Controller(args);
 		}
 	}
