@@ -18,9 +18,11 @@ namespace UsefulExplorer
 		 */
 		public static string convert(double size)
 		{
-			string s = "";
+			Console.WriteLine(size);
+			string s;
 			int j = 0;
-			for (int i = 0; i < ("" + size).Length / 3 - 1; i++)
+			int tmp = ("" + size).Length;
+			for (int i = 0; i < tmp / 3; i++)
 			{
 				size = size / 1024;
 				j = i;
