@@ -16,15 +16,34 @@ namespace UsefulExplorer
 		 * @param size the size of a file or folder in bytes
 		 * @return a converted string from the size in a more human readable form
 		 */
-		public static string convert(long size)
+		public static string convert(double size)
 		{
-			string s = ""
+			string s = "";
+			int j = 0;
 			for (int i = 0; i < ("" + size).Length / 3 - 1; i++)
 			{
 				size = size / 1000;
+				j = i;
 			}
-
-			return size;
+			switch (j)
+			{
+				case 0:
+					s = "" + (Math.Round(size * 100.0) / 100) + " KB";
+					break;
+				case 1:
+					s = "" + (Math.Round(size * 100.0) / 100) + " MB";
+					break;
+				case 2:
+					s = "" + (Math.Round(size * 100.0) / 100) + " GB";
+					break;
+				case 3:
+					s = "" + (Math.Round(size * 100.0) / 100) + " TB";
+					break;
+				default:
+					s = "" + size + " Bytes";
+					break;
+			}
+			return s;
 		}
 	}
 }

@@ -40,7 +40,7 @@ namespace UsefulExplorer
 							{
 								ShowContent.setMainPath(this.arg["-l"]);
 								ShowContent.listFiles(this.arg["-l"]);
-								Console.WriteLine("Total size of folder \'" + this.arg["-l"] + "\':\t" + ByteConverter.convert(ShowContent.getTotalSize()) + " Bytes");
+								Console.WriteLine("Total size of folder \'" + this.arg["-l"] + "\':\t" + ByteConverter.convert(ShowContent.getTotalSize()));
 							}
 						}
 						// writes error message if second argument is missing. In this case the path
@@ -81,7 +81,7 @@ namespace UsefulExplorer
 		{
 			args = new string[2];
 			args[0] = "-l";
-			args[1] = "E:\\TGM\\4.Klasse\\INSY\\Uebung";
+			args[1] = "E:\\TGM";
 			new Controller(args);
 		}
 	}
