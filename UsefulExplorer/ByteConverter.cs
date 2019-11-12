@@ -22,7 +22,7 @@ namespace UsefulExplorer
 			int j = 0;
 			for (int i = 0; i < ("" + size).Length / 3 - 1; i++)
 			{
-				size = size / 1000;
+				size = size / 1024;
 				j = i;
 			}
 			switch (j)
@@ -38,6 +38,18 @@ namespace UsefulExplorer
 					break;
 				case 3:
 					s = "" + (Math.Round(size * 100.0) / 100) + " TB";
+					break;
+				case 4:
+					s = "" + (Math.Round(size * 100.0) / 100) + " PB";
+					break;
+				case 5:
+					s = "" + (Math.Round(size * 100.0) / 100) + " EB";
+					break;
+				case 6:
+					s = "" + (Math.Round(size * 100.0) / 100) + " ZB";
+					break;
+				case 7:
+					s = "" + (Math.Round(size * 100.0) / 100) + " YB";
 					break;
 				default:
 					s = "" + size + " Bytes";
