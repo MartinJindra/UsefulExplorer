@@ -74,6 +74,10 @@ namespace UsefulExplorer
 				{
 					Console.WriteLine("\nThis programm is aimed to give users some special tools for managing files\nHow to use:\tUsefulExplorer + [Option] + [Arguments...]\n\nOptions:\n*) -l [path of directory]\t\tList all files and directories\n*) -b [number] [path of directory]\tList \'number\' of biggest files in a directory\n*) -h\t\t\t\t\tShow this help\n");
 				}
+				else
+				{
+					Console.WriteLine("Sorry either this feature is not yet implemented or not availability");
+				}
 			}
 		
 			// writes error message if no arguments are given
