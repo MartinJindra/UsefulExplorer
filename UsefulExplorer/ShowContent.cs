@@ -10,7 +10,7 @@ namespace UsefulExplorer
 		private static DirectoryInfo directoryInfo;
 		private static FileInfo fileinfo;
 
-		public static void setMainPath(string mainpath)
+		public static void init(string mainpath)
 		{
 			ShowContent.mainpathcount = ShowContent.getHowManyPaths(mainpath);
 
