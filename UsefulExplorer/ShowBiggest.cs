@@ -11,12 +11,14 @@ namespace UsefulExplorer
 		private static Dictionary<int ,long> sizes;
 		private static FileInfo fileinfo;
 		private static int index;
+		private static int num;
 
-		public static void init()
+		public static void init(int num)
 		{
 			ShowBiggest.paths = new List<string>();
 			ShowBiggest.sizes = new Dictionary<int, long>();
 			ShowBiggest.index = 0;
+			ShowBiggest.num = num;
 		}
 
 		public static void listFiles(string path)
@@ -33,15 +35,15 @@ namespace UsefulExplorer
 				ShowBiggest.fileinfo = new FileInfo(path);
 				ShowBiggest.paths.Add(path);
 				ShowBiggest.sizes.Add(ShowBiggest.index, ShowBiggest.fileinfo.Length);
-				Console.WriteLine(ShowBiggest.index + ", " + ShowBiggest.fileinfo.Length);
 				ShowBiggest.index++;	
 			}
 		}
 
-		public static void sortBiggest(int num)
+		public static void sortBiggest()
 		{
 			bool tausch = true;
-			double cache = 0;
+			long sizetmp;
+			string pathtmp;
 			for (int i = 1; i < ShowBiggest.sizes.Count; i++)
 			{
 				for (int i1 = 0; i1 < ShowBiggest.sizes.Count - i; i1++)
@@ -49,20 +51,39 @@ namespace UsefulExplorer
 					if (ShowBiggest.sizes[i1] > ShowBiggest.sizes[i1 + 1])
 					{
 						tausch = false;
-						cache = array[i1 + 1];
-						array[i1 + 1] = array[i1];
-						array[i1] = cache;
+
+						sizetmp = ShowBiggest.sizes[i1 + 1];
+						ShowBiggest.sizes[i1 + 1] = ShowBiggest.sizes[i1];
+						ShowBiggest.sizes[i1] = sizetmp;
+
+						pathtmp = ShowBiggest.paths[i1 + 1];
+						ShowBiggest.paths[i1 + 1] = ShowBiggest.paths[i1];
+						ShowBiggest.paths[i1] = pathtmp;
 					}
-					if (array[i1] > array[i1 + 1] && tausch == true)
+					if (ShowBiggest.sizes[i1] > ShowBiggest.sizes[i1 + 1] && tausch == true)
 					{
-						cache = array[i1];
-						array[i1] = array[i1 + 1];
-						array[i1 + 1] = cache;
+						sizetmp = ShowBiggest.sizes[i1];
+						ShowBiggest.sizes[i1] = ShowBiggest.sizes[i1 + 1];
+						ShowBiggest.sizes[i1 + 1] = sizetmp;
+
+						pathtmp = ShowBiggest.paths[i1];
+						ShowBiggest.paths[i1] = ShowBiggest.paths[i1 + 1];
+						ShowBiggest.paths[i1 + 1] = pathtmp;
 					}
 				}
 			}
-			return array;
 		}
-		*/
+
+		public static void show()
+		{
+			for (int i = ShowBiggest.sizes.Count - 1, j = 0; i > -1; i--, j++)
+			{
+				if (j < ShowBiggest.num)
+				{
+					Console.WriteLine((j + 1) + ". " + ShowBiggest.paths[i] + " - " + ByteConverter.convert(ShowBiggest.sizes[i]) + " Bytes");
+				}
+				else break;
+			}
+		}
 	}
 }

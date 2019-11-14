@@ -53,14 +53,15 @@ namespace UsefulExplorer
 					{
 						try
 						{
-							ShowBiggest.init();
+							ShowBiggest.init(int.Parse(args[1]));
 							ShowBiggest.listFiles(args[2]);
 						}
 						catch(UnauthorizedAccessException unauthorized)
 						{
 							Console.WriteLine("A path is not accessable:\t" + unauthorized.Message);
 						}
-						// ShowBiggest.showBiggest(int.Parse(args[1]));
+						ShowBiggest.sortBiggest();
+						ShowBiggest.show();
 					}
 					// writes error message if second argument is missing. In this case the path
 					else
@@ -79,11 +80,6 @@ namespace UsefulExplorer
 
 		static void Main(string[] args)
 		{
-			args = new string[3];
-			args[0] = "-b";
-			args[1] = "10";
-			args[2] = "E:\\TGM\\4.Klasse";
-			
 			new Controller(args);
 		}
 	}
