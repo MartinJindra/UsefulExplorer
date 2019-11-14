@@ -70,7 +70,7 @@ namespace UsefulExplorer
 					}
 				}
 				// shows help
-				else if (args[0] == "-h")
+				else if (args[0] == "-h" || args[0] == "--help")
 				{
 					Console.WriteLine("\nThis programm is aimed to give users some special tools for managing files\nHow to use:\tUsefulExplorer + [Option] + [Arguments...]\n\nOptions:\n*) -l [path of directory]\t\tList all files and directories\n*) -b [number] [path of directory]\tList \'number\' of biggest files in a directory\n*) -h\t\t\t\t\tShow this help\n");
 				}
