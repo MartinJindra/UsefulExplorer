@@ -74,6 +74,28 @@ namespace UsefulExplorer
 				{
 					Console.WriteLine("\nThis programm is aimed to give users some special tools for managing files\nHow to use:\tUsefulExplorer + [Option] + [Arguments...]\n\nOptions:\n*) -l [path of directory]\t\tList all files and directories\n*) -b [number] [path of directory]\tList \'number\' of biggest files in a directory\n*) -h\t\t\t\t\tShow this help\n");
 				}
+				// Shows biggest directory with specific depth
+				else if (args[0] == "-bd")
+				{
+					if (args.Length > 2)
+					{
+						try
+						{
+
+						}
+						catch (UnauthorizedAccessException unauthorized)
+						{
+							Console.WriteLine("A path is not accessable:\t" + unauthorized.Message);
+						}
+						ShowBiggest.sortBiggest();
+						ShowBiggest.show();
+					}
+					// writes error message if second argument is missing. In this case the path
+					else
+					{
+						Console.WriteLine("second and/or thired argument(s) is/are missing");
+					}
+				}
 				else
 				{
 					Console.WriteLine("Sorry either this feature is not yet implemented or not availability");
