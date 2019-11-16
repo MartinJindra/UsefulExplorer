@@ -53,15 +53,15 @@ namespace UsefulExplorer
 					{
 						try
 						{
-							ShowBiggest.init(int.Parse(args[1]));
-							ShowBiggest.listFiles(args[2]);
+							ShowBiggestFiles.init(int.Parse(args[1]));
+							ShowBiggestFiles.listFiles(args[2]);
 						}
 						catch(UnauthorizedAccessException unauthorized)
 						{
 							Console.WriteLine("A path is not accessable:\t" + unauthorized.Message);
 						}
-						ShowBiggest.sortBiggest();
-						ShowBiggest.show();
+						ShowBiggestFiles.sortBiggest();
+						ShowBiggestFiles.show();
 					}
 					// writes error message if second argument is missing. In this case the path
 					else
@@ -76,12 +76,13 @@ namespace UsefulExplorer
 					{
 						try
 						{
+
 						}
 						catch (UnauthorizedAccessException unauthorized)
 						{
 							Console.WriteLine("A path is not accessable:\t" + unauthorized.Message);
 						}
-						
+
 					}
 					// writes error message if second argument is missing. In this case the path
 					else
