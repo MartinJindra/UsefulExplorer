@@ -69,27 +69,6 @@ namespace UsefulExplorer
 						Console.WriteLine("second and/or third argument(s) is/are missing");
 					}
 				}
-				// Shows biggest directories with a specific depth
-				else if (args[0] == "-bdir")
-				{
-					if (args.Length > 3)
-					{
-						try
-						{
-
-						}
-						catch (UnauthorizedAccessException unauthorized)
-						{
-							Console.WriteLine("A path is not accessable:\t" + unauthorized.Message);
-						}
-
-					}
-					// writes error message if second argument is missing. In this case the path
-					else
-					{
-						Console.WriteLine("second, third and/or fourth argument(s) is/are missing");
-					}
-				}
 				// shows help
 				else if (args[0] == "-h" || args[0] == "--help")
 				{
@@ -97,7 +76,7 @@ namespace UsefulExplorer
 				}
 				else
 				{
-					Console.WriteLine("Sorry either this feature is not yet implemented or not availability");
+					Console.WriteLine("Sorry either this feature is not yet implemented or not availability\n");
 				}
 			}
 		
