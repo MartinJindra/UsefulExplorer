@@ -7,6 +7,7 @@ namespace UsefulExplorer
 	{
 		private static long totalsize;
 		private static int mainpathcount;
+		private static long amount = 0;
 		private static DirectoryInfo directoryInfo;
 		private static FileInfo fileinfo;
 
@@ -44,6 +45,7 @@ namespace UsefulExplorer
 				}
 				ShowContent.fileinfo = new FileInfo(path);
 				Console.WriteLine(ShowContent.fileinfo.Name + " - " + ShowContent.fileinfo.LastAccessTimeUtc.ToString() + " - " + ShowContent.fileinfo.Length + " Bytes");
+				ShowContent.amount++;
 				ShowContent.totalsize += ShowContent.fileinfo.Length;
 			}
 		}
@@ -60,6 +62,10 @@ namespace UsefulExplorer
 				}
 			}
 			return num;
+		}
+		public static long getAmount()
+		{
+			return ShowContent.amount;
 		}
 	}
 }

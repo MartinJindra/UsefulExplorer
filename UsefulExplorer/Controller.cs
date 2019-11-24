@@ -34,7 +34,7 @@ namespace UsefulExplorer
 						{
 							ShowContent.init(args[1]);
 							ShowContent.listFiles(args[1]);
-							Console.WriteLine("Total size of folder \'" + args[1] + "\': " + ByteConverter.convert(ShowContent.getTotalSize()));
+							Console.WriteLine("Total size of folder \'" + args[1] + "\': " + ByteConverter.convert(ShowContent.getTotalSize()) + " with " + ShowContent.getAmount + " Files");
 						} catch (UnauthorizedAccessException unauthorized)
 						{
 							Console.WriteLine("A path is not accessable:\t" + unauthorized.Message);
