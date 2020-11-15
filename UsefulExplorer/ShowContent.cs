@@ -46,7 +46,7 @@ namespace UsefulExplorer
 					Console.Write("----");
 				}
 				ShowContent.fileinfo = new FileInfo(path);
-				Console.WriteLine(ShowContent.fileinfo.Name + " - " + ShowContent.fileinfo.LastAccessTimeUtc.ToString() + " - " + ShowContent.fileinfo.Length + " Bytes");
+				Console.WriteLine(ShowContent.fileinfo.Name + " - " + ShowContent.fileinfo.LastAccessTimeUtc.ToString() + " - " + ByteConverter.convert(ShowContent.fileinfo.Length));
 				ShowContent.files++;
 				ShowContent.totalsize += ShowContent.fileinfo.Length;
 			}
